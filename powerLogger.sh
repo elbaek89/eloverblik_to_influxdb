@@ -1,9 +1,10 @@
 #!/bin/bash
 # uses jq (sudo apt-get install jq)
 # script pulls from two meters (since i have solar panels, i can get production from separate meter). If that isn't needed, just remove the second meterpoint id and modify where needed. 
-# For the first time you run it, you can modify the dayNum loop from {2..0} to a larger number, e.g. 365..0 to pull previous data. Just remember to 
-# reset the number afterwards if you plan on running the script regularly. 
-# The last thing you need is to create the influxdb table you want to push to - i had no trouble there. 
+# Every time the script runs it looks for production data from the last couple of days. This is necessary as some power retailers have a one to two day delay before their data is available on eloverblik. adjust accordingly. 
+# For the first time you run it, you can modify the dayNum loop from {2..0} to a larger number, e.g. 365..0 to pull data from the previous year or so. Just remember to 
+# reset the number afterwards if you plan on running the script regularly, as this takes alot of time and you don't want to be blacklisted by eloverblik. 
+# The last thing you need is to create the influxdb table you want to push to - i had no trouble there. see the readme. 
 
 # 1. Retrieve token
 RefreshToken=eyJhbGciOiJIUzI1...
