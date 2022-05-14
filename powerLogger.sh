@@ -22,8 +22,8 @@ do
    Date2=$(date -d @$(( $(date +"%s") - 86400*$dayNum)) +"%Y-%m-%d")
 
    # 2. Retrieve data
-   ResponseJSON_consumption=$(curl -s -X POST "https://api.eloverblik.dk/CustomerApi/api/meterdata/gettimeseries/$Date1/$Date2/Hour" -H  "accept: application/json" -H  "Authorization: Bearer $AccessToken" -H  $
-   ResponseJSON_production=$(curl -s -X POST "https://api.eloverblik.dk/CustomerApi/api/meterdata/gettimeseries/$Date1/$Date2/Hour" -H  "accept: application/json" -H  "Authorization: Bearer $AccessToken" -H  "$
+   ResponseJSON_consumption=$(curl -s -X POST "https://api.eloverblik.dk/CustomerApi/api/meterdata/gettimeseries/$Date1/$Date2/Hour" -H  "accept: application/json" -H  "Authorization: Bearer $AccessToken")
+   ResponseJSON_production =$(curl -s -X POST "https://api.eloverblik.dk/CustomerApi/api/meterdata/gettimeseries/$Date1/$Date2/Hour" -H  "accept: application/json" -H  "Authorization: Bearer $AccessToken")
 
    values_consumption=( $(jq -r '.result[].MyEnergyData_MarketDocument.TimeSeries[].Period[].Point[]."out_Quantity.quantity"' <<< "$ResponseJSON_consumption") )
    values_production=( $(jq -r '.result[].MyEnergyData_MarketDocument.TimeSeries[].Period[].Point[]."out_Quantity.quantity"' <<< "$ResponseJSON_production") )
